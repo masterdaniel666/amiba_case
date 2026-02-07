@@ -3,8 +3,8 @@ clear;clc;format long; warning('off');
 
 Z = [];
 
-for b = 9           %1:1:6    %形狀 6
-for c = 2        %1:1:4    解析解 4
+for b = 9         %1:1:6    %形狀 6
+for c = 4         %1~4 解析解
 for d = 5         %0.5:0.5:10  zo 源點隨機參數 7
 for e = 1/6         %0:1:9    計算時間 5
 for f = e+1/6       %6,10     結束時間 5
@@ -303,7 +303,7 @@ function [A] = MFSMatrix(op,sp,zw,ap)
 
 
 
-%=========================================
+%===解析解============================================
 function [BD] = Exactsol(op,ap,e)
  x = op(:,1);   y = op(:,2); z  = op(:,3);
  r = sqrt((x.^2+y.^2));
@@ -311,19 +311,19 @@ switch e
     case 1
       BD = 3+cos(pi*x./10).*cos(pi*y./10).*sin(2^0.5*pi*z./10);
       %The method of fundemental solutions for the multi-dimensional wave equations
-    case 2
+    case 3
       BD = 2+sin(pi*x/4).*sin(pi*y/4).*cos(2^0.5*pi*z/4);
       %Domain Type Kernel-Based Meshless Methods for Solving Wave Equations
     % case 3
     %   BD = 3+sin(pi*(r.*x+1)/2).*sin(pi*(r.*y+1)/2).*cos(2^0.5*pi*z/2);
-    case 3
+    case 2
       BD = 4+besselj(0,r).*(cos(5*z)+sin(5*z)); 
       %Solving Inverse Wave Problems Using Spacetime Radial Basis Functions in Neural Networks
-    case 4 
-      BD = 3+(x+y)+(x.^2+y.^2).*z+(2/3).*(z.^3);
+    %case 4 
+      %BD = 3+(x+y)+(x.^2+y.^2).*z+(2/3).*(z.^3);
       % Analytical Solution of Two Dimensional Wave equations by New Laplace Transform Variational Iterative Method
-    case 5
-      BD = 1+sin(pi*x/10).*sin(pi*y/10).*cos(2^0.5*pi*z/10);
+    case 4
+      BD = 3+cos(pi*x/10).*cos(pi*y/10).*sin(2^0.5*pi*z/10);
     otherwise
       error(' Exact sol error !!! ')
 end
